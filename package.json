@@ -12,10 +12,13 @@
     "test:e2e:products": "cypress run --spec 'cypress/e2e/products.cy.js'",
     "lint": "eslint 'cypress/**/*.js'",
     "lint:fix": "eslint 'cypress/**/*.js' --fix",
-    "format": "prettier --write 'cypress/**/*.js'"
+    "format": "prettier --write 'cypress/**/*.js'",
+    "report:open": "open cypress/reports/index.html",
+    "report:clean": "rm -rf cypress/reports"
   },
   "devDependencies": {
     "cypress": "^15.18.1",
+    "cypress-mochawesome-reporter": "^4.0.2",
     "eslint": "^10.7.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-cypress": "^6.4.2",
