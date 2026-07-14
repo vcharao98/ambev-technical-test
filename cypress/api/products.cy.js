@@ -12,12 +12,14 @@ describe('API - Products', () => {
       administrador: 'true',
     }
 
-    cy.createUser(admin).then((res) => {
-      adminId = res.body._id
-      return cy.loginAs(admin.email, admin.password)
-    }).then((res) => {
-      token = res.body.authorization
-    })
+    cy.createUser(admin)
+      .then((res) => {
+        adminId = res.body._id
+        return cy.loginAs(admin.email, admin.password)
+      })
+      .then((res) => {
+        token = res.body.authorization
+      })
   })
 
   afterEach(() => {

@@ -16,16 +16,20 @@ describe('E2E - Products', () => {
   let productName
 
   before(() => {
-    cy.createUser(admin).then((res) => {
-      adminId = res.body._id
-      return cy.loginAs(admin.email, admin.password)
-    }).then((res) => {
-      token = res.body.authorization
-    })
+    cy.createUser(admin)
+      .then((res) => {
+        adminId = res.body._id
+        return cy.loginAs(admin.email, admin.password)
+      })
+      .then((res) => {
+        token = res.body.authorization
+      })
   })
 
   after(() => {
-    cy.request(`${Cypress.env('apiUrl')}/produtos?nome=${encodeURIComponent(productName)}`).then((res) => {
+    cy.request(
+      `${Cypress.env('apiUrl')}/produtos?nome=${encodeURIComponent(productName)}`
+    ).then((res) => {
       if (res.body.quantidade > 0) {
         cy.deleteProduct(res.body.produtos[0]._id, token)
       }
@@ -42,7 +46,13 @@ describe('E2E - Products', () => {
 
     NavBar.goToCreateProduct()
 
-    CreateProductPage.createProduct(productName, 100, 'Test description', 10, 'cypress/fixtures/test-image.png')
+    CreateProductPage.createProduct(
+      productName,
+      100,
+      'Test description',
+      10,
+      'cypress/fixtures/test-image.png'
+    )
 
     ProductListPage.getProductInList(productName).should('be.visible')
   })

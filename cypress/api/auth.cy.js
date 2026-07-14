@@ -21,7 +21,9 @@ describe('API - Authentication', () => {
   it('should authenticate with valid credentials and return a token', () => {
     cy.loginAs(user.email, user.password).then((res) => {
       expect(res.status).to.eq(200)
-      expect(res.body.authorization).to.match(/^Bearer\s[\w-]+\.[\w-]+\.[\w-]+$/)
+      expect(res.body.authorization).to.match(
+        /^Bearer\s[\w-]+\.[\w-]+\.[\w-]+$/
+      )
       expect(res.body.message).to.eq('Login realizado com sucesso')
     })
   })

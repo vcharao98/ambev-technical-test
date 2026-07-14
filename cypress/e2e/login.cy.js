@@ -35,6 +35,8 @@ describe('E2E - Login', () => {
     LoginPage.login(user.email, 'wrongpassword')
 
     cy.url().should('include', '/login')
-    LoginPage.getErrorMessage().should('be.visible').and('contain', 'Email e/ou senha inválidos')
+    LoginPage.getErrorMessage()
+      .should('be.visible')
+      .and('contain', 'Email e/ou senha inválidos')
   })
 })

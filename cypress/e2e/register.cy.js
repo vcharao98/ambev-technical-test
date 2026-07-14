@@ -10,11 +10,13 @@ describe('E2E - Register', () => {
   }
 
   after(() => {
-    cy.request(`${Cypress.env('apiUrl')}/usuarios?email=${user.email}`).then((res) => {
-      if (res.body.quantidade > 0) {
-        cy.deleteUser(res.body.usuarios[0]._id)
+    cy.request(`${Cypress.env('apiUrl')}/usuarios?email=${user.email}`).then(
+      (res) => {
+        if (res.body.quantidade > 0) {
+          cy.deleteUser(res.body.usuarios[0]._id)
+        }
       }
-    })
+    )
   })
 
   it('should register a new user and redirect to home', () => {
@@ -23,7 +25,9 @@ describe('E2E - Register', () => {
 
     RegisterPage.registerUser(user.nome, user.email, user.password, false)
 
-    RegisterPage.getSuccessMessage().should('be.visible').and('contain', 'Cadastro realizado com sucesso')
+    RegisterPage.getSuccessMessage()
+      .should('be.visible')
+      .and('contain', 'Cadastro realizado com sucesso')
     cy.url().should('include', '/home')
   })
 })
