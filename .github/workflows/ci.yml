@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: 'Test suite to run'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - api
+          - e2e
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run API tests
+        if: ${{ inputs.suite == 'all' || inputs.suite == 'api' }}
+        run: npm run test:api
+
+      - name: Run E2E tests
+        if: ${{ inputs.suite == 'all' || inputs.suite == 'e2e' }}
+        run: npm run test:e2e
+
+      - name: Upload test reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-reports
+          path: cypress/reports/
