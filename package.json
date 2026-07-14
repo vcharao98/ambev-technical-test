@@ -9,9 +9,16 @@
     "test:e2e": "cypress run --spec 'cypress/e2e/**/*.cy.js'",
     "test:e2e:login": "cypress run --spec 'cypress/e2e/login.cy.js'",
     "test:e2e:register": "cypress run --spec 'cypress/e2e/register.cy.js'",
-    "test:e2e:products": "cypress run --spec 'cypress/e2e/products.cy.js'"
+    "test:e2e:products": "cypress run --spec 'cypress/e2e/products.cy.js'",
+    "lint": "eslint 'cypress/**/*.js'",
+    "lint:fix": "eslint 'cypress/**/*.js' --fix",
+    "format": "prettier --write 'cypress/**/*.js'"
   },
   "devDependencies": {
-    "cypress": "^15.18.1"
+    "cypress": "^15.18.1",
+    "eslint": "^10.7.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-cypress": "^6.4.2",
+    "prettier": "^3.9.5"
   }
 }
